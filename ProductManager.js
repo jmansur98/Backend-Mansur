@@ -28,20 +28,20 @@ class ProductManager {
   writeToFile() {
     const data = JSON.stringify(this.products, null, 2);
     // convierte el array de productos a json
-    fs.writeFileSync(this.path, data, 'utf8');
+    fs.writeFileSync(this.path, data, 'utf-8');
     // escribe el json en el archivo
   }
 
-  addProduct(title, description, price, thumbnail, code, stock) {
+  addProduct(title, description, price, imagen, stock) {
     // si alguno de los campos esta vacio, no se agrega el producto
-    if (!title || !description || isNaN(price) || !thumbnail || !code || isNaN(stock)) {
-      console.error("Campos inválidos o faltantes.");
-      return; 
-    // si el precio o el stock no son numeros, no se agrega el producto
+    if (this.products.some(product => product.id === id)) {
+      console.error("Producto existente.");
+      return;
     }
+    
 
 
-    if (this.products.some(product => product.code === code)) {
+    if (this.products.some(product => product.id === newProduct.id)) {
       // si el codigo ya existe, no se agrega el producto
       console.error("Producto existente.");
       return;
@@ -52,8 +52,7 @@ class ProductManager {
       title,
       description,
       price,
-      thumbnail,
-      code,
+      imagen,
       stock
     };
 
@@ -73,7 +72,8 @@ class ProductManager {
     if (foundProduct) {
       return foundProduct;
     } else {
-      console.error("No se encontró el producto.");
+      console.error(`No se encontró el producto con ID ${id}.`);
+      return null;
     }
   }
 
@@ -106,11 +106,6 @@ class ProductManager {
 const productManager = new ProductManager('productos.json');
 // crea una instancia de ProductManager
 
-productManager.addProduct("Producto 1", "Descripción 1", 10.55, "imagen1.jpg", "P001", 100);
-productManager.addProduct("Producto 2", "Descripción 2", 17.99, "imagen2.jpg", "P002", 50);
-productManager.updateProduct(1, { price: 15.99, stock: 90 });
-productManager.deleteProduct(2);
-// agrega, actualiza y elimina productos
 
 const allProducts = productManager.getProducts();
 console.log("Productos totales:", allProducts);
@@ -122,3 +117,4 @@ console.log("Producto encontrado por ID:", foundProduct);
 const nonExistentProductId = 999;
 const nonExistentProduct = productManager.getProductById(nonExistentProductId);
 console.log("Producto no encontrado por ID:", nonExistentProduct);
+module.exports = ProductManager;
