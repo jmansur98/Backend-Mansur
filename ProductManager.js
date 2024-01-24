@@ -103,7 +103,6 @@ class ProductManager {
 }
 
 const productManager = new ProductManager('productos.json');
-// crea una instancia de ProductManager
 
 
 const allProducts = productManager.getProducts();

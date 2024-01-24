@@ -18,11 +18,11 @@ app.get('/products/:pid', (req, res) => {
   if (product) {
     res.json({ product });
   } else {
-    res.status(404).json({ error: 'Producto no encontrado' });
+    res.status(404).json({ error: 'EL PRODUCTO NO EXISTE!!!!!!!!' });
   }
 });
 
-// Inicia el servidor
+// iniciar el servidor
 app.listen(port, () => {
   console.log(`Servidor iniciado en http://localhost:${port}`);
 });
