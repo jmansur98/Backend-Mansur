@@ -42,7 +42,6 @@ class ProductManager {
 
 
     if (this.products.some(product => product.id === newProduct.id)) {
-      // si el codigo ya existe, no se agrega el producto
       console.error("Producto existente.");
       return;
     }
